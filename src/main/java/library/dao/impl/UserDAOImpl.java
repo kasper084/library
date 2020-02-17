@@ -2,18 +2,19 @@ package library.dao.impl;
 
 import library.dao.UserDAO;
 import library.entity.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Repository;
+
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
 public class UserDAOImpl implements UserDAO {
-    private static SessionFactory sessionFactory;
-    private Session session;
 
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Override
@@ -28,11 +29,13 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> findAll() {
-        return session.createQuery("select u from users u", User.class).getResultList();
+        return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
 
     @Override
-    public User findUser(String name) {
-        return null; //session.createQuery("select User u from users where u.name = " + name, User.class).getSingleResult();
+    public TypedQuery<User> findUser(String name) {
+        return
+                entityManager
+                        .createQuery("select u from User u where u.name = " + name, User.class);
     }
 }

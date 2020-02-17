@@ -2,6 +2,7 @@ package library.dao;
 
 import library.entity.User;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public interface UserDAO {
@@ -12,7 +13,7 @@ public interface UserDAO {
 
     List<User> findAll();
 
-    default User findUser(String name) {
+    default TypedQuery<User> findUser(String name) {
         return null;
     }
 }
