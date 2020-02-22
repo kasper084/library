@@ -3,16 +3,25 @@ package library.menu.impl;
 import library.menu.Menu;
 import library.menu.input.Input;
 
+import library.service.impl.UserServiceImpl;
+import library.session.UserSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+@Component
 public class LoginMenu implements Menu {
     private List<String> options = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
-    Input input = new Input();
+    private Input input = new Input();
+
+    @Autowired
+    private UserServiceImpl userService;
 
     @Override
     public void addOptions() {
@@ -32,13 +41,21 @@ public class LoginMenu implements Menu {
                 int choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
-
+                        userService.login(input.getUserName()).ifPresentOrElse(user -> {
+                            UserSession.getInstance().setLoggedUser(user);
+                            new UserMenu().show();
+                        }, () -> {
+                            System.out.println("Try again or register");
+                            showOptions(options);
+                        });
                         break;
                     case 2:
-
+                        userService.registerUser(input.getUserName());
+                        System.out.println("User registered");
+                        showOptions(options);
                         break;
                     case 3:
-                        new LoginMenu();
+                        new LoginMenu().show();
                         break;
                     case 0:
                         close();

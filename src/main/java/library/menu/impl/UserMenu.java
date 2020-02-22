@@ -2,22 +2,29 @@ package library.menu.impl;
 
 import library.menu.Menu;
 import library.menu.input.Input;
+import library.service.impl.BookServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+@Component
 public class UserMenu implements Menu {
     private List<String> options = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
     Input input = new Input();
 
+    @Autowired
+    private BookServiceImpl bookService;
+
     @Override
     public void addOptions() {
-        options.add("1. Login");
-        options.add("2. Register user");
+        options.add("1. Search books by Genre");
+        options.add("2. Search book by Author");
         options.add("0. Exit");
     }
 
@@ -54,6 +61,6 @@ public class UserMenu implements Menu {
 
     @Override
     public void close() {
-
+        new LoginMenu().show();
     }
 }
