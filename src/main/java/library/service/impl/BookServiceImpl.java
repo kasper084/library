@@ -22,7 +22,12 @@ public class BookServiceImpl implements BookService {
         book.setTitle(title);
         book.setAuthor(author);
         book.setGenre(genre);
-        if (! isExist(title)) bookDAO.save(book);
+        if (isExist(title)) {
+            System.out.println("SUCH BOOK IS ALREADY IN THE LIBRARY");
+        } else {
+            bookDAO.save(book);
+            System.out.println("REGISTERED");
+        }
     }
 
     @Override
@@ -38,6 +43,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public Optional<Book> findByTitle(String title) {
         return bookDAO.findByTitle(title);
+    }
+
+    @Override
+    public Optional<Book> findById(Integer id) {
+        return bookDAO.findById(id);
     }
 
     private boolean isExist(String title) {

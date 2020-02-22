@@ -14,4 +14,6 @@ public interface BookService {
     List<Book> findByGenre(String genre);
 
     Optional<Book> findByTitle(String title);
+
+    Optional<Book> findById(Integer id);
 }

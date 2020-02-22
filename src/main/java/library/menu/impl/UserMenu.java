@@ -1,15 +1,17 @@
 package library.menu.impl;
 
+import library.dao.RecordDAO;
+import library.entity.Book;
 import library.menu.Menu;
 import library.menu.input.Input;
+import library.service.UserService;
 import library.service.impl.BookServiceImpl;
+import library.service.impl.RecordServiceImpl;
+import library.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 @Component
 public class UserMenu implements Menu {
@@ -20,6 +22,9 @@ public class UserMenu implements Menu {
 
     @Autowired
     private BookServiceImpl bookService;
+
+    @Autowired
+    private RecordServiceImpl recordService;
 
     @Override
     public void addOptions() {
@@ -39,16 +44,32 @@ public class UserMenu implements Menu {
             var choice = scanner.nextLine();
             switch (choice) {
                 case "1":
-
+                    bookService.addNewBook(input.getTitle(), input.getAuthor(), input.getGenre());
+                    showOptions(options);
                     break;
                 case "2":
-
+                    List<Book> booksByGenre = bookService.findByGenre(input.getGenre());
+                    if (!booksByGenre.isEmpty()) {
+                        for (Book book : booksByGenre) {
+                            System.out.println(book);
+                        }
+                    } else System.out.println("WE DON'T HAVE SUCH BOOKS");
+                    showOptions(options);
                     break;
                 case "3":
-
+                    List<Book> booksByAuthor = bookService.findByAuthor(input.getAuthor());
+                    if (!booksByAuthor.isEmpty()) {
+                        for (Book book : booksByAuthor) {
+                            System.out.println(book);
+                        }
+                    } else System.out.println("WE DON'T HAVE SUCH BOOKS");
+                    showOptions(options);
                     break;
                 case "4":
-
+                    Book book = bookService.findById(input.getBookId()).orElse(null);
+                    if (Objects.nonNull(book)) recordService.addRecord(book);
+                    else System.out.println("NO SUCH BOOK IN LIBRARY");
+                    showOptions(options);
                     break;
                 case "0":
                     close();

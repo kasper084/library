@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,13 +42,12 @@ public class LoginMenu implements Menu {
                         UserSession.getInstance().setLoggedUser(user);
                         new UserMenu().show();
                     }, () -> {
-                        System.out.println("Try again or register");
+                        System.out.println("TRY AGAIN OR REGISTER");
                         showOptions(options);
                     });
                     break;
                 case "2":
                     userService.registerUser(input.getUserName());
-                    System.out.println("User registered");
                     showOptions(options);
                     break;
                 case "0":
@@ -62,8 +60,8 @@ public class LoginMenu implements Menu {
         }
     }
 
-        @Override
-        public void close () {
-            System.exit(0);
-        }
+    @Override
+    public void close() {
+        System.exit(0);
     }
+}

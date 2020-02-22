@@ -26,8 +26,8 @@ public class Input {
         return scanner.nextLine();
     }
 
-    public String getBookId() {
+    public Integer getBookId() {
         System.out.println("Enter book ID");
-        return scanner.nextLine();
+        return scanner.nextInt();
     }
 }

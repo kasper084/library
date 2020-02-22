@@ -18,7 +18,12 @@ public class UserServiceImpl implements UserService {
     public void registerUser(String name) {
         User user = new User();
         user.setName(name);
-        if (!isExist(name)) userDAO.save(user);
+        if (isExist(name)) {
+            System.out.println("CHOOSE ANOTHER USERNAME");
+        } else {
+            userDAO.save(user);
+            System.out.println("REGISTERED");
+        }
     }
 
     public Optional<User> login(String name) {
@@ -28,4 +33,5 @@ public class UserServiceImpl implements UserService {
     private boolean isExist(String name) {
         return userDAO.findByName(name).isPresent();
     }
+
 }
