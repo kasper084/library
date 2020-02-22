@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,6 +18,6 @@ public class User implements Serializable {
 
     private String name;
 
-    @OneToMany(mappedBy = "user")
-    private List<LibRecord> records;
+    @ManyToMany(mappedBy = "users")
+    private List<Book> books = new ArrayList<>();
 }

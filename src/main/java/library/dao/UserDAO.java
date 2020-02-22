@@ -1,18 +1,13 @@
 package library.dao;
 
 import library.entity.User;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface UserDAO {
+@Repository
+public interface UserDAO extends CrudRepository<User, Integer> {
 
-    void saveUser(User user);
-
-    boolean isExist(String name);
-
-    List<User> findAll();
-
-    default User findUser(String name) {
-        return null;
-    }
+    Optional<User> findByName(String name);
 }

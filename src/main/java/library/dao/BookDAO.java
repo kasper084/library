@@ -1,17 +1,16 @@
 package library.dao;
 
 import library.entity.Book;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface BookDAO {
+public interface BookDAO extends CrudRepository<Book, Integer> {
 
-    List<Book> findAll();
+    Optional<Book> findByTitle(String title);
 
-    void addBook(Book book);
+    List<Book> findByAuthor(String author);
 
-    default Optional<Book> findBook(String criteria) {
-        return Optional.empty();
-    }
+    List<Book> findByGenre(String genre);
 }
