@@ -3,20 +3,18 @@ package library.service.impl;
 import library.dao.BookDAO;
 import library.entity.Book;
 import library.service.BookService;
-import lombok.AllArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class BookServiceImpl implements BookService {
 
-    private final BookDAO bookDAO;
+    @Autowired
+    private BookDAO bookDAO;
 
     @Override
     public void addNewBook(String title, String author, String genre) {

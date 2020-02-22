@@ -23,8 +23,10 @@ public class UserMenu implements Menu {
 
     @Override
     public void addOptions() {
-        options.add("1. Search books by Genre");
-        options.add("2. Search book by Author");
+        options.add("1. Add new book");
+        options.add("2. Search books by Genre");
+        options.add("3. Search book by Author");
+        options.add("4. Take book");
         options.add("0. Exit");
     }
 
@@ -33,34 +35,33 @@ public class UserMenu implements Menu {
         addOptions();
         showOptions(options);
 
-        try {
-            while (true) {
-                int choice = scanner.nextInt();
-                switch (choice) {
-                    case 1:
+        while (true) {
+            var choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
 
-                        break;
-                    case 2:
+                    break;
+                case "2":
 
-                        break;
-                    case 0:
-                        close();
-                        break;
-                    default:
-                        showOptions(options);
-                        break;
-                }
+                    break;
+                case "3":
+
+                    break;
+                case "4":
+
+                    break;
+                case "0":
+                    close();
+                    break;
+                default:
+                    showOptions(options);
+                    break;
             }
-
-        } catch (InputMismatchException i) {
-            System.out.println("PLEASE CHOOSE NUMBER FROM MENU");
-            new LoginMenu().show();
         }
-
     }
 
     @Override
     public void close() {
-        new LoginMenu().show();
+        System.exit(0);
     }
 }

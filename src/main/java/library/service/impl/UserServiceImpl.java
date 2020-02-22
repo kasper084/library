@@ -3,16 +3,16 @@ package library.service.impl;
 import library.dao.UserDAO;
 import library.entity.User;
 import library.service.UserService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserDAO userDAO;
+    @Autowired
+    private UserDAO userDAO;
 
     @Override
     public void registerUser(String name) {

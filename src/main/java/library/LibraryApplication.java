@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LibraryApplication  implements CommandLineRunner {
 
     @Autowired
-    private LoginMenu loginMenu;
+    LoginMenu loginMenu;
 
     public static void main(String[] args) {
         SpringApplication.run(LibraryApplication.class, args);

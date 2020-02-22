@@ -27,7 +27,6 @@ public class LoginMenu implements Menu {
     public void addOptions() {
         options.add("1. Login");
         options.add("2. Register user");
-        options.add("3. Logout");
         options.add("0. Exit");
     }
 
@@ -36,44 +35,35 @@ public class LoginMenu implements Menu {
         addOptions();
         showOptions(options);
 
-        try {
-            while (true) {
-                int choice = scanner.nextInt();
-                switch (choice) {
-                    case 1:
-                        userService.login(input.getUserName()).ifPresentOrElse(user -> {
-                            UserSession.getInstance().setLoggedUser(user);
-                            new UserMenu().show();
-                        }, () -> {
-                            System.out.println("Try again or register");
-                            showOptions(options);
-                        });
-                        break;
-                    case 2:
-                        userService.registerUser(input.getUserName());
-                        System.out.println("User registered");
+        while (true) {
+            var choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    userService.login(input.getUserName()).ifPresentOrElse(user -> {
+                        UserSession.getInstance().setLoggedUser(user);
+                        new UserMenu().show();
+                    }, () -> {
+                        System.out.println("Try again or register");
                         showOptions(options);
-                        break;
-                    case 3:
-                        new LoginMenu().show();
-                        break;
-                    case 0:
-                        close();
-                        break;
-                    default:
-                        showOptions(options);
-                        break;
-                }
+                    });
+                    break;
+                case "2":
+                    userService.registerUser(input.getUserName());
+                    System.out.println("User registered");
+                    showOptions(options);
+                    break;
+                case "0":
+                    close();
+                    break;
+                default:
+                    showOptions(options);
+                    break;
             }
-
-        } catch (InputMismatchException i) {
-            System.out.println("PLEASE CHOOSE NUMBER FROM MENU");
-            new LoginMenu().show();
         }
     }
 
-    @Override
-    public void close() {
-        System.exit(0);
+        @Override
+        public void close () {
+            System.exit(0);
+        }
     }
-}
