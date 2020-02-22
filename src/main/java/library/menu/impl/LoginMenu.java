@@ -20,6 +20,9 @@ public class LoginMenu implements Menu {
     private Input input = new Input();
 
     @Autowired
+    UserMenu userMenu;
+
+    @Autowired
     private UserServiceImpl userService;
 
     @Override
@@ -40,7 +43,7 @@ public class LoginMenu implements Menu {
                 case "1":
                     userService.login(input.getUserName()).ifPresentOrElse(user -> {
                         UserSession.getInstance().setLoggedUser(user);
-                        new UserMenu().show();
+                        userMenu.show();
                     }, () -> {
                         System.out.println("TRY AGAIN OR REGISTER");
                         showOptions(options);

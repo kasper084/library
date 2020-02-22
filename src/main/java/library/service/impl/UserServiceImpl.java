@@ -33,5 +33,4 @@ public class UserServiceImpl implements UserService {
     private boolean isExist(String name) {
         return userDAO.findByName(name).isPresent();
     }
-
 }

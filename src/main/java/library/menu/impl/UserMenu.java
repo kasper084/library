@@ -1,13 +1,11 @@
 package library.menu.impl;
 
-import library.dao.RecordDAO;
+
 import library.entity.Book;
 import library.menu.Menu;
 import library.menu.input.Input;
-import library.service.UserService;
 import library.service.impl.BookServiceImpl;
 import library.service.impl.RecordServiceImpl;
-import library.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -48,7 +46,8 @@ public class UserMenu implements Menu {
                     showOptions(options);
                     break;
                 case "2":
-                    List<Book> booksByGenre = bookService.findByGenre(input.getGenre());
+                    List<Book> booksByGenre = Collections.emptyList();
+                            booksByGenre = bookService.findByGenre(input.getGenre());
                     if (!booksByGenre.isEmpty()) {
                         for (Book book : booksByGenre) {
                             System.out.println(book);
@@ -57,7 +56,8 @@ public class UserMenu implements Menu {
                     showOptions(options);
                     break;
                 case "3":
-                    List<Book> booksByAuthor = bookService.findByAuthor(input.getAuthor());
+                    List<Book> booksByAuthor = Collections.emptyList();
+                    booksByAuthor = bookService.findByAuthor(input.getAuthor());
                     if (!booksByAuthor.isEmpty()) {
                         for (Book book : booksByAuthor) {
                             System.out.println(book);
