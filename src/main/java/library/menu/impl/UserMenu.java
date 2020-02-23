@@ -46,8 +46,7 @@ public class UserMenu implements Menu {
                     showOptions(options);
                     break;
                 case "2":
-                    List<Book> booksByGenre = Collections.emptyList();
-                            booksByGenre = bookService.findByGenre(input.getGenre());
+                    List<Book> booksByGenre = bookService.findAllByGenre(input.getGenre());
                     if (!booksByGenre.isEmpty()) {
                         for (Book book : booksByGenre) {
                             System.out.println(book);
@@ -56,8 +55,7 @@ public class UserMenu implements Menu {
                     showOptions(options);
                     break;
                 case "3":
-                    List<Book> booksByAuthor = Collections.emptyList();
-                    booksByAuthor = bookService.findByAuthor(input.getAuthor());
+                    List<Book> booksByAuthor = bookService.findAllByAuthor(input.getAuthor());
                     if (!booksByAuthor.isEmpty()) {
                         for (Book book : booksByAuthor) {
                             System.out.println(book);

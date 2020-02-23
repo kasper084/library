@@ -12,7 +12,9 @@ public interface BookDAO extends CrudRepository<Book, Integer> {
 
     Optional<Book> findByTitle(String title);
 
-    List<Book> findByAuthor(String author);
+    List<Book> findAllByAuthor(String author);
 
-    List<Book> findByGenre(String genre);
+    List<Book> findAllByGenre(String genre);
+
+    List<Book> findAllByTitle(String title);
 }
