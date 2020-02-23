@@ -41,11 +41,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findAllByTitle(String title) {
-        return bookDAO.findAllByTitle(title);
-    }
-
-    @Override
     public Optional<Book> findByTitle(String title) {
         return bookDAO.findByTitle(title);
     }

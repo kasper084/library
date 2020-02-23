@@ -13,8 +13,6 @@ public interface BookService {
 
     List<Book> findAllByGenre(String genre);
 
-    List<Book> findAllByTitle(String title);
-
     Optional<Book> findByTitle(String title);
 
     Optional<Book> findById(Integer id);
