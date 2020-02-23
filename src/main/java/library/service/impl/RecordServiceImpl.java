@@ -23,5 +23,6 @@ public class RecordServiceImpl implements RecordService {
         record.setUserId(UserSession.getInstance().getUser().getId());
         record.setBookId(book.getId());
         recordDAO.save(record);
+        System.out.println("REGISTERED");
     }
 }
