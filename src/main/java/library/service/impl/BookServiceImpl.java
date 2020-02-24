@@ -7,6 +7,7 @@ import library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +27,15 @@ public class BookServiceImpl implements BookService {
             System.out.println("SUCH BOOK IS ALREADY IN THE LIBRARY");
         } else {
             bookDAO.save(book);
-            System.out.println("REGISTERED");
+            System.out.println("BOOK WAS ADDED");
         }
+    }
+
+    @Override
+    public List<Book> findAll() {
+        List<Book> books = new ArrayList<>();
+        bookDAO.findAll().forEach(books::add);
+        return books;
     }
 
     @Override

@@ -9,6 +9,8 @@ public interface BookService {
 
     void addNewBook(String title, String author, String genre);
 
+    List<Book> findAll();
+
     List<Book> findAllByAuthor(String author);
 
     List<Book> findAllByGenre(String genre);

@@ -64,6 +64,12 @@ public class UserMenu implements Menu {
                     showOptions(options);
                     break;
                 case "4":
+                    List<Book> allBooks = bookService.findAll();
+                    if (!allBooks.isEmpty()) {
+                        for (Book book : allBooks) {
+                            System.out.println(book);
+                        }
+                    } else System.out.println("WE DON'T HAVE ANY BOOKS YET");
                     Book book = bookService.findById(input.getBookId()).orElse(null);
                     if (Objects.nonNull(book)) recordService.addRecord(book);
                     else System.out.println("NO SUCH BOOK IN LIBRARY");

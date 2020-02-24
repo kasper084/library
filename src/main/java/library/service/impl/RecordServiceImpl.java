@@ -8,6 +8,8 @@ import library.session.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class RecordServiceImpl implements RecordService {
 
@@ -22,7 +24,8 @@ public class RecordServiceImpl implements RecordService {
         Record record = new Record();
         record.setUserId(UserSession.getInstance().getUser().getId());
         record.setBookId(book.getId());
+        record.setLocalDate(LocalDate.now());
         recordDAO.save(record);
-        System.out.println("REGISTERED");
+        System.out.println("RECORD WAS ADDED TO LIBRARY JOURNAL");
     }
 }
