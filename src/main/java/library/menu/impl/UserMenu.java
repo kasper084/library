@@ -5,7 +5,7 @@ import library.entity.Book;
 import library.menu.Menu;
 import library.menu.input.Input;
 import library.service.impl.BookServiceImpl;
-import library.service.impl.RecordServiceImpl;
+import library.session.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +20,6 @@ public class UserMenu implements Menu {
 
     @Autowired
     private BookServiceImpl bookService;
-
-    @Autowired
-    private RecordServiceImpl recordService;
 
     @Override
     public void addOptions() {
@@ -71,8 +68,10 @@ public class UserMenu implements Menu {
                         }
                     } else System.out.println("WE DON'T HAVE ANY BOOKS YET");
                     Book book = bookService.findById(input.getBookId()).orElse(null);
-                    if (Objects.nonNull(book)) recordService.addRecord(book);
-                    else System.out.println("NO SUCH BOOK IN LIBRARY");
+                    if (Objects.nonNull(book)) {
+                        book.getUsers().add(UserSession.getInstance().getUser());
+                        bookService.save(book);
+                    } else System.out.println("NO SUCH BOOK IN LIBRARY");
                     showOptions(options);
                     break;
                 case "0":

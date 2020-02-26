@@ -1,6 +1,5 @@
 package library.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Data
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "books")
 public class Book implements Serializable {
@@ -25,12 +24,8 @@ public class Book implements Serializable {
 
     private String genre;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-/*    @JoinTable(
-            name = "lib_records",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = { @JoinColumn(name = "book_id") }
-    )*/
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     private List<User> users = new ArrayList<>();
 
     @Override

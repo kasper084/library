@@ -21,9 +21,14 @@ public class UserServiceImpl implements UserService {
         if (isExist(name)) {
             System.out.println("CHOOSE ANOTHER USERNAME");
         } else {
-            userDAO.save(user);
+            save(user);
             System.out.println("REGISTERED");
         }
+    }
+
+    @Override
+    public void save(User user) {
+        userDAO.save(user);
     }
 
     public Optional<User> login(String name) {

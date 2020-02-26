@@ -8,5 +8,7 @@ public interface UserService {
 
     void registerUser(String name);
 
+    void save(User user);
+
     Optional<User> login(String name);
 }

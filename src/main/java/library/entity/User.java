@@ -18,6 +18,6 @@ public class User implements Serializable {
 
     private String name;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
     private List<Book> books = new ArrayList<>();
 }

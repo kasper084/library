@@ -26,9 +26,14 @@ public class BookServiceImpl implements BookService {
         if (isExist(title)) {
             System.out.println("SUCH BOOK IS ALREADY IN THE LIBRARY");
         } else {
-            bookDAO.save(book);
+            save(book);
             System.out.println("BOOK WAS ADDED");
         }
+    }
+
+    @Override
+    public void save(Book book) {
+        bookDAO.save(book);
     }
 
     @Override
